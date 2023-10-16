@@ -1,0 +1,87 @@
+:root {
+    --red: rgb(115, 8, 8);
+}
+
+#jumbo {
+    font-family: 'Big Shoulders Inline Text', cursive;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: var(--red);
+}
+
+#message{
+    font-family: 'Big Shoulders Inline Text', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.button {
+    transition-duration: 0.4s;
+}
+  
+.button:hover {
+    background-color: var(--red); 
+    color: white;
+}
+
+#btn {
+    background-color: var(--red);
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 12px;
+}
+
+#addBtn {
+    font-family: 'Big Shoulders Inline Text', cursive;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--red);
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 12px;
+}
+
+#addBtn:hover {
+    background-color: rgb(107, 102, 102);
+    transition-duration: 0.4s;
+}
+
+#saveBtn {
+    font-family: 'Big Shoulders Inline Text', cursive;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--red);
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 12px;
+}
+
+#saveBtn:hover {
+    background-color: rgb(107, 102, 102);
+    transition-duration: 0.4s;
+}
+
+.myButtons {
+    font-family: 'Big Shoulders Inline Text', cursive;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--red);
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 12px;
+}
+
+.myButtons:hover {
+    background-color: rgb(107, 102, 102);
+    transition-duration: 0.4s;
+}
+
+.tb-headers {
+    font-family: 'Big Shoulders Inline Text', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+}
