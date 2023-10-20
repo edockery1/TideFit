@@ -14,8 +14,11 @@ addButton.addEventListener("click", () => {
     message.style.display = "none" // hiding message after the add click 
 })
 
-function handleOnLoad(workouts) {
+async function handleOnLoad(workouts) {
     createTable(workouts) // table is created when page loads
+    let response = await fetch ('http://localhost:5074/api/Workout');
+    let data = await response.json();
+    console.log(data);
 }
 
 function createTable(workouts) {
@@ -60,15 +63,15 @@ function createTable(workouts) {
             tableBody.appendChild(tr)
     
             let td2 = document.createElement('TD')
-            td2.appendChild(document.createTextNode(`${workout.activity}`))
+            td2.appendChild(document.createTextNode(`${workout.activityType}`))
             tr.appendChild(td2)
     
             let td3 = document.createElement('TD')
-            td3.appendChild(document.createTextNode(`${workout.distance}`))
+            td3.appendChild(document.createTextNode(`${workout.distanceMiles}`))
             tr.appendChild(td3)
     
             let td4 = document.createElement('TD')
-            td4.appendChild(document.createTextNode(`${workout.date}`))
+            td4.appendChild(document.createTextNode(`${workout.dateCompleted}`))
             tr.appendChild(td4)
     
             let pbtn = document.createElement('BUTTON')
@@ -104,7 +107,7 @@ async function addActivity(workouts) {
         <label for = "activityName">Activity Name:</label>
         <input type = "text" id = "activityName" placeholder = "Enter Activity Name"><br/><br/>
         <label for = "distance">Distance in Miles:</label>
-        <input type = "distance" id = "distance" placeholder = "Enter Distance"><br/><br/>
+        <input type = "distance" id = "distanceMiles" placeholder = "Enter Distance"><br/><br/>
         <button id="saveBtn" type="submit" onclick="saveActivity()">Save Activity</button>      
         </form>
     `
@@ -123,15 +126,13 @@ async function saveActivity() {
 
         today = mm + '/' + dd + '/' + yyyy; // formatted date
 
-        let newID = "id" + Math.random().toString(16).slice(2) // giving new values for new workout
         let newActivity = document.getElementById("activityName").value
-        let newDistance = document.getElementById("distance").value
+        let newDistance = document.getElementById("distanceMiles").value
         let newDate = today
         let workout = { // making new workout object
-            id: newID,
-            activity: newActivity,
-            distance: newDistance,
-            date: newDate,
+            activityType: newActivity,
+            distanceMiles: newDistance,
+            dateCompleted: newDate,
             pinned: "No",
             deleted: false
         }
