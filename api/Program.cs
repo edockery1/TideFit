@@ -1,3 +1,4 @@
+using mis321_pa4_edockery1;
 using Microsoft.AspNetCore.Cors;
 using MySql.Data.MySqlClient;
 
@@ -11,7 +12,6 @@ while(rdr.Read())
 {
     System.Console.WriteLine($"{rdr.GetString(0)} {rdr.GetString(1)} {rdr.GetString(2)} {rdr.GetString(3)} {rdr.GetString(4)}");
 }
-
 con.Close();
 
 
