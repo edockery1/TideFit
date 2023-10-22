@@ -1,21 +1,3 @@
-using mis321_pa4_edockery1;
-using Microsoft.AspNetCore.Cors;
-using MySql.Data.MySqlClient;
-
-Database db = new Database();
-using var con = new MySqlConnection(db.cs);
-con.Open();
-string stm = "SELECT * from workout;"; // check this 
-using var cmd = new MySqlCommand(stm, con);
-using MySqlDataReader rdr = cmd.ExecuteReader();
-while(rdr.Read())
-{
-    System.Console.WriteLine($"{rdr.GetString(0)} {rdr.GetString(1)} {rdr.GetString(2)} {rdr.GetString(3)} {rdr.GetString(4)}");
-}
-con.Close();
-
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

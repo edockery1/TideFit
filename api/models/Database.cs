@@ -1,4 +1,4 @@
-namespace mis321_pa4_edockery1
+namespace api.models
 {
     public class Database
     {
@@ -17,7 +17,7 @@ namespace mis321_pa4_edockery1
             port = "3306";
             password = "o6b0heh4zs5ahg9i";
 
-            cs = $"server={host};user={username};database={database};port={port};password{password}";
+            cs = $"server = {host}; user = {username}; database = {database}; port = {port}; password = {password};";
         }
     }
 }

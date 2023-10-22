@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using api.models;
+using mis321_pa4_edockery1.database;
 
 namespace api.Controllers
 {
@@ -21,35 +22,34 @@ namespace api.Controllers
         }
 
         // GET: api/Workout/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{exerciseId}", Name = "Get")]
         public Workout Get(int exerciseId)
         {
             WorkoutUtility utility = new WorkoutUtility();
-            List<Workout> myWorkouts = utility.GetAllWorkouts();
-            foreach(Workout workout in myWorkouts) {
-                if(workout.exerciseId == exerciseId) {
-                    return workout;
-                }
-            }
-            return new Workout();
+            return utility.GetWorkout(exerciseId);
         }
 
         // POST: api/Workout
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Workout value)
         {
+            AddWorkout save = new AddWorkout();
+            save.SaveWorkout(value);
         }
 
         // PUT: api/Workout/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{exerciseId}")]
+        public void Put(int exerciseId, [FromBody] Workout value)
         {
+            AddWorkout save = new AddWorkout();
+            save.updateWorkout(value);
         }
 
         // DELETE: api/Workout/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(int exerciseId)
         {
+            System.Console.WriteLine(exerciseId);
         }
     }
 }
