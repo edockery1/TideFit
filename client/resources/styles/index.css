@@ -1,87 +1,161 @@
-:root {
-    --red: rgb(115, 8, 8);
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff; /* White background */
+    color: #333333;
+    margin: 0;
+    padding: 0;
 }
 
-#jumbo {
-    font-family: 'Big Shoulders Inline Text', cursive;
-    font-family: 'Montserrat', sans-serif;
+#app {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.jumbotron {
+    background-color: #fff5f5; /* Light Crimson background */
+    padding: 20px 0;
     text-align: center;
-    color: rgb(255, 255, 255);
-    background-color: var(--red);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(255, 0, 0, 0.11), 0 1px 3px rgba(255, 0, 0, 0.08); /* Crimson shadows */
 }
 
-#message{
+.container h1 {
     font-family: 'Big Shoulders Inline Text', cursive;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 30px;
-    font-weight: bolder;
-    text-align: center;
+    font-weight: 300;
+    font-size: 3em;
+    color: #990000; /* Dark Crimson */
 }
 
-.button {
-    transition-duration: 0.4s;
-}
-  
-.button:hover {
-    background-color: var(--red); 
-    color: white;
-}
-
-#btn {
-    background-color: var(--red);
-    color: white;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 12px;
-}
-
-#addBtn {
-    font-family: 'Big Shoulders Inline Text', cursive;
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--red);
-    color: white;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 12px;
-}
-
-#addBtn:hover {
-    background-color: rgb(107, 102, 102);
-    transition-duration: 0.4s;
-}
-
-#saveBtn {
-    font-family: 'Big Shoulders Inline Text', cursive;
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--red);
-    color: white;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 12px;
-}
-
-#saveBtn:hover {
-    background-color: rgb(107, 102, 102);
-    transition-duration: 0.4s;
+#description {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #666666;
 }
 
 .myButtons {
-    font-family: 'Big Shoulders Inline Text', cursive;
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--red);
+    background-color: #dc3545; /* Crimson */
     color: white;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 12px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .myButtons:hover {
-    background-color: rgb(107, 102, 102);
-    transition-duration: 0.4s;
+    background-color: #b52b3a; /* Darker Crimson */
+    transform: translateY(-2px);
 }
 
-.tb-headers {
-    font-family: 'Big Shoulders Inline Text', cursive;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bolder;
+#addDIV {
+    margin-top: 20px;
 }
+
+.workouts-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table-row.header {
+    background-color: #dc3545; /* Crimson */
+    color: #ffffff;
+}
+
+.table-row:hover {
+    background-color: #f9f9f9;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #dc3545; /* Crimson */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333333;
+}
+
+input, button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+input {
+    background-color: #ffffff;
+    color: #495057;
+}
+
+.pinButton, .deleteButton {
+    margin: auto;
+    border: 1px solid crimson; /* Thin crimson border */
+}
+
+button {
+    background-color: #dc3545; /* Crimson */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #b52b3a; /* Darker Crimson */
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+footer {
+    background-color: #fff5f5;
+    padding: 20px 0;
+    color: #990000;
+    text-align: center;
+    border-top: 3px solid #ffffff;
+    margin: auto;
+    max-width: 1200px;
+  }
+  
+  .footer-container {
+    padding: 0 20px;
+  }
+  
+  .quote {
+    font-size: 1.5em;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+  }
+  
+  .author {
+    font-size: 1em;
+    margin: 0;
+    font-weight: 300;
+  }
+  
+  @media (max-width: 768px) {
+    .jumbotron h1 {
+        font-size: 2em;
+    }
+    .quote {
+      font-size: 1.2em;
+    }
+  
+    .author {
+      font-size: 0.9em;
+    }
+  }
+  

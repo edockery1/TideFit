@@ -1,10 +1,6 @@
 let app = document.getElementById('app') // setting app variable to HTML app div
+const url = 'http://localhost:5074/api/Workout';
 // localStorage.clear()
-
-let workouts = JSON.parse(localStorage.getItem('myWorkouts')) 
-if (!workouts) {
-    workouts = []
-}
 
 // getting the message and button elements
 const message = document.getElementById("message")
@@ -14,10 +10,10 @@ addButton.addEventListener("click", () => {
     message.style.display = "none" // hiding message after the add click 
 })
 
-async function handleOnLoad(workouts) {
-    createTable(workouts) // table is created when page loads
-    let response = await fetch ('http://localhost:5074/api/Workout');
+async function handleOnLoad() {
+    let response = await fetch (url);
     let data = await response.json();
+    createTable(data) // table is created when page loads
     console.log(data);
 }
 
@@ -58,7 +54,7 @@ function createTable(workouts) {
     tr.appendChild(th7)
 
     workouts.forEach((workout) => { // for loop to run through entire workouts array and make rows for each workout
-        if (workout.deleted != true) { // if statement to not print a deleted worked
+        if (workout.deleted != 'true') { // if statement to not print a deleted worked
             let tr = document.createElement('TR')
             tableBody.appendChild(tr)
     
@@ -75,10 +71,10 @@ function createTable(workouts) {
             tr.appendChild(td4)
     
             let pbtn = document.createElement('BUTTON')
-            pbtn.className = "myButtons"
-            pbtn.id = `${workout.id}` // giving pin button id of workout so we know which is targeted
+            pbtn.className = "myButtons pinButton"
+            pbtn.id = `${workout.exerciseId}` // giving pin button id of workout so we know which is targeted
             pbtn.onclick = () => {
-                pinActivity(workouts, workout.id) // clicking button runs the pinActivity function
+                handleUpdate(workout.exerciseId)
             }
             pbtn.appendChild(document.createTextNode('Pin'))
             tr.appendChild(pbtn)
@@ -88,10 +84,10 @@ function createTable(workouts) {
             tr.appendChild(td6)
     
             let dbtn = document.createElement('BUTTON')
-            dbtn.className = "myButtons"
-            dbtn.id = `${workout.id}` // giving delete button id of workout so we know which is targeted
+            dbtn.className = "myButtons deleteButton"
+            dbtn.id = `${workout.exerciseId}` // giving delete button id of workout so we know which is targeted
             dbtn.onclick = () => {
-                deleteActivity(workouts, workout.id) // clicking button runs the deleteActivity function
+                deleteActivity(workouts, workout.exerciseId) // clicking button runs the deleteActivity function
             }
             dbtn.appendChild(document.createTextNode('Delete'))
             tr.appendChild(dbtn)
@@ -100,7 +96,7 @@ function createTable(workouts) {
     app.appendChild(table) // adding entire table to end of app div
 }
 
-async function addActivity(workouts) {
+async function addActivity() {
     document.getElementById("addDIV").innerHTML = // targets the addDiv element and sets the button HTML to display the forms for a new workout
     `
         <form id = "addActivity">
@@ -116,7 +112,7 @@ async function addActivity(workouts) {
 // save activity 
 async function saveActivity() {
     let addForm = document.getElementById('addDIV') // targeting addDiv to get values for new workout forms
-    addForm.addEventListener('submit', function (e) { // listening for the 'submit' event (save) then runing funtion to add
+    addForm.addEventListener('submit', async function (e) { // listening for the 'submit' event (save) then runing funtion to add
         e.preventDefault()
 
         var today = new Date(); // creating date
@@ -126,41 +122,69 @@ async function saveActivity() {
 
         today = mm + '/' + dd + '/' + yyyy; // formatted date
 
-        let newActivity = document.getElementById("activityName").value
-        let newDistance = document.getElementById("distanceMiles").value
-        let newDate = today
-        let workout = { // making new workout object
-            activityType: newActivity,
-            distanceMiles: newDistance,
-            dateCompleted: newDate,
-            pinned: "No",
-            deleted: false
+        let workout = {
+            activityType: document.getElementById("activityName").value,
+            distanceMiles: document.getElementById("distanceMiles").value,
+            dateCompleted: today,
+            pinned: 'No', 
+            deleted: 'false'
         }
-        workouts.unshift(workout) // adding new workout to beginning of array so its displayed at top
-        localStorage.setItem('myWorkouts', JSON.stringify(workouts)) // saving to local storage
+
+        console.log(workout)
+
+        await fetch(url, {
+            method: 'POST', 
+            headers: {
+                accept: '*/*',
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(workout),
+        })
+
+        location.reload()
     })
 
-    location.reload() // reloading page to get updated table
 }
     
-function pinActivity(workouts, pickedID) {
-    let finding = workouts.find((workout) => workout.id == pickedID) // finding all info for workout based on id passed from button click
-    let index = workouts.findIndex((workout) => workout.id === pickedID) // finding index of workout in workouts array
+async function handleUpdate(exerciseId){
+    let response = await fetch (url);
+    let data = await response.json();
+    pinActivity(data, exerciseId)
+}
 
-    if (finding.pinned == "Yes") {
-       workouts[index].pinned = "No" // if pinned unpin it
-    } else {
-        workouts[index].pinned = "Yes" // if not pinned pin it
-    }
 
-    localStorage.setItem('myWorkouts', JSON.stringify(workouts)) // save updated workouts to local storage
-    location.reload() // reloading page to see pinned/unpinned workout(s)
+async function pinActivity(workouts, pickedID) {
+    const newUrl = `${url}/${pickedID}`;
 
+    const workoutToPin = workouts.find((data) => data.exerciseId == pickedID);
+    workoutToPin.pinned = workoutToPin.pinned === 'Yes' ? 'No' : 'Yes';
+
+    await fetch(newUrl, {
+        method: 'PUT',
+        headers: {
+            accept: '*/*',
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(workoutToPin),
+    })
+
+    location.reload()
 }
     
-function deleteActivity(workouts, pickedID) {
-    let index = workouts.findIndex(x => x.id === pickedID) // getting index of workout from ID of the workout clicked to delete
-    workouts[index].deleted = true // setting workouts deleted to true
-    localStorage.setItem('myWorkouts', JSON.stringify(workouts)) // saving updated workouts to local storage
-    location.reload() // reloading page to see removed workout is gone
+async function deleteActivity(workouts, pickedID) {
+    const newUrl = `${url}/${pickedID}`;
+
+    const workoutToPin = workouts.find((data) => data.exerciseId == pickedID);
+    workoutToPin.deleted = workoutToPin.deleted === 'true' ? 'false' : 'true';
+
+    await fetch(newUrl, {
+        method: 'PUT',
+        headers: {
+            accept: '*/*',
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(workoutToPin),
+    })
+
+    location.reload()
 }
