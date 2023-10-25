@@ -143,7 +143,6 @@ async function saveActivity() {
 
         location.reload()
     })
-
 }
     
 async function handleUpdate(exerciseId){
@@ -151,7 +150,6 @@ async function handleUpdate(exerciseId){
     let data = await response.json();
     pinActivity(data, exerciseId)
 }
-
 
 async function pinActivity(workouts, pickedID) {
     const newUrl = `${url}/${pickedID}`;
