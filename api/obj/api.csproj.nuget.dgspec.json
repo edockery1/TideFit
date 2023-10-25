@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/elliedockery/Desktop/mis321-pa4-edockery1/api/api.csproj": {}
+    "/Users/elliedockery/Desktop/nerdalert/321code/mis321-pa4-edockery1/api/api.csproj": {}
   },
   "projects": {
-    "/Users/elliedockery/Desktop/mis321-pa4-edockery1/api/api.csproj": {
+    "/Users/elliedockery/Desktop/nerdalert/321code/mis321-pa4-edockery1/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/elliedockery/Desktop/mis321-pa4-edockery1/api/api.csproj",
+        "projectUniqueName": "/Users/elliedockery/Desktop/nerdalert/321code/mis321-pa4-edockery1/api/api.csproj",
         "projectName": "api",
-        "projectPath": "/Users/elliedockery/Desktop/mis321-pa4-edockery1/api/api.csproj",
+        "projectPath": "/Users/elliedockery/Desktop/nerdalert/321code/mis321-pa4-edockery1/api/api.csproj",
         "packagesPath": "/Users/elliedockery/.nuget/packages/",
-        "outputPath": "/Users/elliedockery/Desktop/mis321-pa4-edockery1/api/obj/",
+        "outputPath": "/Users/elliedockery/Desktop/nerdalert/321code/mis321-pa4-edockery1/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/elliedockery/.nuget/NuGet/NuGet.Config"

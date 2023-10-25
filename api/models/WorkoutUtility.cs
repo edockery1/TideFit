@@ -10,7 +10,7 @@ namespace api.models
 
             using var con = new MySqlConnection(db.cs);
             con.Open();
-            string stm = "SELECT * from workout ORDER BY dateCompleted desc;"; // check this 
+            string stm = "SELECT * from workout ORDER BY dateCompleted asc;"; // check this 
             using var cmd = new MySqlCommand(stm, con);
             using MySqlDataReader rdr = cmd.ExecuteReader();
             while(rdr.Read())
@@ -19,8 +19,6 @@ namespace api.models
                 myWorkouts.Insert(0, temp);
             }
             con.Close();
-            // myWorkouts.Add(new Workout(){exerciseId = 1, activityType = "Running", distanceMiles = "13", dateCompleted = "5/10/23", pinned = true, deleted = false});
-            // myWorkouts.Add(new Workout(){exerciseId = 2, activityType = "Rollerblading", distanceMiles = "5", dateCompleted = "12/25/23", pinned = true, deleted = false});
             return myWorkouts;
         }
 
@@ -52,6 +50,5 @@ namespace api.models
             
             return null;  // handle the case where no workout is found
         }
-
     }
 }
